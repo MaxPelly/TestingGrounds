@@ -15,7 +15,9 @@ EBTNodeResult::Type UChoseNextWaypoint::ExecuteTask(UBehaviorTreeComponent & Own
 	if (!ensure(PatrolRoute)) { return EBTNodeResult::Failed; }
 	
 	auto PatrollPoints = PatrolRoute->GetPatrollRoute();
-	if (PatrollPoints.Num() <= 0) { return EBTNodeResult::Failed; }
+	if (PatrollPoints.Num() <= 0) { 
+		UE_LOG(LogTemp, Warning, TEXT("A guard is missing patrol points"))
+		return EBTNodeResult::Failed; }
 
 	//get current index
 	auto BlackboardComp = OwnerComp.GetBlackboardComponent();
